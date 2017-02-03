@@ -15,8 +15,6 @@ Capybara.run_server = false
 Capybara.current_driver = :selenium
 
 $domain = "https://landing.google.com"
-$url = "https://landing.google.com/sre/book/"
-chapter_urls = [] 
 
 def visit
   full_pdf = CombinePDF.new
@@ -24,7 +22,7 @@ def visit
   Capybara.visit url
   html_doc = Nokogiri::HTML(Capybara.page.body)
 
-  # Get links of each list element and add to chapter_urls
+  # Grab table contents and retrieve links
   lis = html_doc.css('.content li a')
 
   lis.each do |li|
